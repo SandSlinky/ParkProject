@@ -47,6 +47,7 @@ public class RowingTimer : MonoBehaviour
             StartCoroutine(rowingFail());
         }
     }
+
     public void SetTimer(bool enabled)
     {
         if (enabled)
@@ -60,6 +61,7 @@ public class RowingTimer : MonoBehaviour
             countdownText.gameObject.SetActive(enabled);
         }
     }
+
     public void ResetTimer(bool startEnabled = false)
     {
         SetTimer(startEnabled);
