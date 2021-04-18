@@ -28,7 +28,7 @@ public class ObstacleGenerator : MonoBehaviour
         
         for (int i = 0; i < numObstacles; i++)
         {
-            Random.seed = System.DateTime.Now.Millisecond;
+            Random.InitState(System.DateTime.Now.Millisecond);
             var obj = obstacles[Random.Range(0, obstacles.Length)];
             var posBlock = new Vector3(obstaclesStartWidth + i * obstaclesWidthInterval, 0, transform.position.z);
             var pos = new Vector3(
