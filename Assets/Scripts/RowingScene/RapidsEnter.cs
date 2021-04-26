@@ -8,6 +8,6 @@ public class RapidsEnter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        rowingMovement.moveSpeed = 10f;
+        rowingMovement.moveSpeed = 7.5f;
     }
 }

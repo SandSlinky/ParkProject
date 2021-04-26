@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Trash
+  - InventoryMenu
+  - RowingMedal
   layers:
   - Default
   - TransparentFX

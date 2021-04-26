@@ -10,6 +10,7 @@ public class RowingTimer : MonoBehaviour
     [SerializeField] private RowingMovement rowingMovement;
     [SerializeField] private Text countdownText;
     [SerializeField] public Text startCountdown;
+    public GameObject retryMenu;
 
     public float timerSpeed = 0f;
 
@@ -18,7 +19,7 @@ public class RowingTimer : MonoBehaviour
         yield return new WaitForSecondsRealtime(3f);
         ResetTimer(true);
         SetTimer(false);
-        rowingMovement.canMove = true;
+        retryMenu.SetActive(true);
     }
 
     void Start()

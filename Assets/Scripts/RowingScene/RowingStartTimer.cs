@@ -7,7 +7,6 @@ public class RowingStartTimer : MonoBehaviour
 
 {
     [SerializeField] public float currentTime = 3f;
-    [SerializeField] private float startingTime = 3;
     [SerializeField] private RowingMovement rowingMovement;
     [SerializeField] public Text startCountdown;
     [SerializeField] private RowingTimer rowingTimer;
@@ -25,6 +24,7 @@ public class RowingStartTimer : MonoBehaviour
         // Start is called before the first frame update
         void Start()
     {
+        timerSpeed = 1f;
         rowingMovement.canMove = false;
     }
 

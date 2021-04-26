@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RowingScene.unity
     guid: 99babad88368e1a409f0208b031049c7
+  - enabled: 1
+    path: Assets/Scenes/BikingScene.unity
+    guid: d028a67cf5c23cc45a8985fd7f175a61
   m_configObjects: {}
