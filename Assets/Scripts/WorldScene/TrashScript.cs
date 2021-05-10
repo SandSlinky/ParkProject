@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class TrashScript : MonoBehaviour
 {
+	public int trashId = 0;
     public int trashValue = 1;
-    private static bool trashCollected = false;
 
-    private void Awake()
+    private void Start()
     {
-        if (trashCollected == true)
+	    trashId = TrashCollection.instance.GetTrashId();
+        if (TrashCollection.instance.HasPickedUpTrash(trashId) == true)
         {
             Destroy(gameObject);
         }
     }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
-        TrashCollection.instance.ChangeTrash(trashValue);
-        trashCollected = true;
+        TrashCollection.instance.ChangeTrash(trashId, trashValue);
         Destroy(gameObject);
     }
 }
