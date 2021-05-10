@@ -9,7 +9,7 @@ public class TimerExtension : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        rowingTimer.currentTime += 10;
+        rowingTimer.currentTime += 3;
         Destroy(gameObject);
     }
 

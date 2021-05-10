@@ -5,19 +5,12 @@ using UnityEngine;
 public class TrashScript : MonoBehaviour
 {
     public int trashValue = 1;
-    private static bool trashCollected = false;
+    [SerializeField] public TrashTracker trashTracker;
 
-    private void Awake()
-    {
-        if (trashCollected == true)
-        {
-            Destroy(gameObject);
-        }
-    }
     void OnTriggerEnter2D(Collider2D collision)
     {
+        trashTracker.Reset();
         TrashCollection.instance.ChangeTrash(trashValue);
-        trashCollected = true;
         Destroy(gameObject);
     }
 }

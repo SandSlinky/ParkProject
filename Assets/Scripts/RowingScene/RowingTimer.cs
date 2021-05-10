@@ -25,6 +25,7 @@ public class RowingTimer : MonoBehaviour
     void Start()
     {
         ResetTimer();
+        retryMenu.SetActive(false);
     }
 
     void Update()

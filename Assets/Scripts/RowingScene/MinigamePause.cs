@@ -8,6 +8,24 @@ public class MinigamePause : MonoBehaviour
     public static bool GamePaused = false;
     public GameObject pauseMenuUI;
     [SerializeField] private RowingStartTimer rowingStartTimer;
+    public AudioSource buttonSound;
+    public bool canPause = true;
+
+    private IEnumerator restartWait()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        SceneManager.GetActiveScene();
+        SceneManager.LoadScene(2);
+        rowingStartTimer.timerSpeed = 1f;
+        Resume();
+    }
+
+    private IEnumerator quitWait()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        Resume();
+    }
 
     void Start()
     {
@@ -16,7 +34,7 @@ public class MinigamePause : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (canPause == true && Input.GetKeyDown(KeyCode.Escape))
         {
             if (GamePaused == true)
             {
@@ -31,6 +49,7 @@ public class MinigamePause : MonoBehaviour
 
     public void Resume()
     {
+        buttonSound.Play();
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GamePaused = false;
@@ -47,15 +66,13 @@ public class MinigamePause : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.GetActiveScene();
-        SceneManager.LoadScene(2);
-        rowingStartTimer.timerSpeed = 1f;
-        Resume();
+        buttonSound.Play();
+        StartCoroutine(restartWait());
     }
 
     public void MinigameQuit()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-        Resume();
+        buttonSound.Play();
+        StartCoroutine(quitWait());
     }
 }

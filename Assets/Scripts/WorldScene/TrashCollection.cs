@@ -9,7 +9,6 @@ public class TrashCollection : MonoBehaviour
     public Text text;
     int trashCollected;
     
-    // Start is called before the first frame update
     void Start()
     {
         if(instance == null)

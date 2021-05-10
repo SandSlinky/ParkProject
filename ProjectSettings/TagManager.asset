@@ -7,6 +7,9 @@ TagManager:
   - Trash
   - InventoryMenu
   - RowingMedal
+  - Point
+  - Obstacle
+  - Timer
   layers:
   - Default
   - TransparentFX
@@ -16,7 +19,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Ground
   - 
   - 
   - 
