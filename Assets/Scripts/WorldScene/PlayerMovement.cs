@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     public bool canMove = true;
     public AudioSource trashSound;
+    [SerializeField] private PlayerData playerData;
 
     Vector2 movement;
 

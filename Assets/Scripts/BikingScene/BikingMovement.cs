@@ -9,18 +9,34 @@ public class BikingMovement : MonoBehaviour
     public bool canMove = true;
     Vector2 movement;
 
+    // Jump variables
+    private bool isGrounded;
+    public Transform bottomPosition;
+    public float checkRadius;
+    public float jumpForce;
+    public LayerMask whatIsGround;
+
+
     // Start is called before the first frame update
     void Start()
     {
         canMove = true;
+        if (isGrounded == true)
+            Debug.Log("Grounded!");
     }
-
+   
     // Update is called once per frame
     void Update()
     {
         if (canMove == true)
         {
             movement.x = 1;
+            isGrounded = Physics2D.OverlapCircle(bottomPosition.position, checkRadius, whatIsGround);
+
+            if(canMove == true && isGrounded == true && Input.GetKeyDown(KeyCode.Space))
+            {
+                rb.velocity = Vector2.up * jumpForce;
+            }
         }
     }
 

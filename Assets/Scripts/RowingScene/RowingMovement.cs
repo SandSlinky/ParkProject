@@ -9,14 +9,14 @@ public class RowingMovement : MonoBehaviour
     public Animator animator;
     public bool canMove = true;
     Vector2 movement;
+    public AudioSource timerSound;
+    public AudioSource obstacleSound;
 
-    // Start is called before the first frame update
     void Start()
     {
         canMove = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (canMove == true)
@@ -35,6 +35,27 @@ public class RowingMovement : MonoBehaviour
         {
             if (canMove == true)
                 rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Timer"))
+        {
+            timerSound.Play();
+        }
+
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
+            obstacleSound.Play();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Timer"))
+        {
+            timerSound.Play();
         }
     }
 }

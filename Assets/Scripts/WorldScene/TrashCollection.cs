@@ -1,61 +1,83 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class TrashCollection : MonoBehaviour
 {
 	public static TrashCollection instance;
-    public Text text;
-    private static int trashCollected;
-	private static int trashTotal = 0;
-	private static List<int> CollectedTrashIds = new List<int>();
-	private bool generationCompleted = false;
-	private int trashCount = 0;
+	[Header("DO NOT CHANGE HERE")]
+    [SerializeField] private int trashCollected;
+	[SerializeField] private int trashTotal = 0;
+	[SerializeField] private List<Vector3> CollectedTrashPositions = new List<Vector3>();
+	[SerializeField] private bool generationCompleted = false;
+	[SerializeField] private int trashCount = 0;
+
+	public UnityEvent UpdateTrashCount;
     
-    // Start is called before the first frame update
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+	        DontDestroyOnLoad(this.gameObject);
         }
         else
         {
 	        instance.generationCompleted = true;
-	        text.text = "Trash collected: " + trashCollected + "/" + trashTotal;
+	        instance.trashCount = 0;
+	        UpdateTrashCollectedText();
+			Destroy(gameObject);
 		}
     }
 
 	private void Start()
 	{
-
 	}
 
 	public int GetTrashId()
 	{
 		if (generationCompleted)
 		{
-			trashTotal++;
-			return trashTotal;
+			trashCount++;
+			UpdateTrashCollectedText();
+			return trashCount;
 		}
 		else
 		{
+			trashTotal++;
+			UpdateTrashCollectedText();
 			trashCount++;
 			return trashCount;
 		}
 	}
 
-    public void ChangeTrash(int trashId, int trashValue)
+    public void ChangeTrash(Vector3 trashPosition, int trashValue)
     {
         trashCollected += trashValue;
-        text.text = "Trash collected: " + trashCollected + "/" + trashTotal;
-        Debug.Log($"Trash collected = {trashCollected}");
-	    CollectedTrashIds.Add(trashId);
+	    UpdateTrashCollectedText();
+		Debug.Log($"Trash collected = {trashCollected}");
+	    CollectedTrashPositions.Add(trashPosition);
     }
 
-	public bool HasPickedUpTrash(int trashId)
+	public bool HasPickedUpTrash(Vector3 trashPosition)
 	{
-		return CollectedTrashIds.Contains(trashId);
+		return CollectedTrashPositions.Contains(trashPosition);
+	}
+
+	public int GetTrashCollected()
+	{
+		return trashCollected;
+	}
+
+	public int GetTrashTotal()
+	{
+		return trashTotal;
+	}
+
+	private void UpdateTrashCollectedText()
+	{
+		UpdateTrashCount.Invoke();
 	}
 }

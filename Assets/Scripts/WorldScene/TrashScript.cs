@@ -10,7 +10,7 @@ public class TrashScript : MonoBehaviour
     private void Start()
     {
 	    trashId = TrashCollection.instance.GetTrashId();
-        if (TrashCollection.instance.HasPickedUpTrash(trashId) == true)
+        if (TrashCollection.instance.HasPickedUpTrash(gameObject.transform.position) == true)
         {
             Destroy(gameObject);
         }
@@ -18,7 +18,7 @@ public class TrashScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        TrashCollection.instance.ChangeTrash(trashId, trashValue);
+        TrashCollection.instance.ChangeTrash(gameObject.transform.position, trashValue);
         Destroy(gameObject);
     }
 }
