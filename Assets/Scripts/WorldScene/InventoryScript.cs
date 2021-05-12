@@ -7,7 +7,22 @@ public class InventoryScript : MonoBehaviour
     public static bool GamePaused = false;
     public GameObject pauseMenuUI;
 
-   void Start()
+    public static InventoryScript instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+    void Start()
     {
         pauseMenuUI.SetActive(false);
     }
